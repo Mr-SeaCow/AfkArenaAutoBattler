@@ -1,13 +1,13 @@
-
-from pynput import mouse, keyboard
-from ImageRec.ImageRec import getImageText
-import PySimpleGUI as sg
-import pyautogui
+# ./Threads/Handler.py
 import time
 import os
 import concurrent.futures
-#{'Master': True, 'TryAgain': False, 'Battle': False, 'Challenge': False, 'Defeat': False, 'Victory': False, 'Begin': False}
 
+import PySimpleGUI as sg
+import pyautogui
+
+from pynput import mouse, keyboard
+from ImageRec.Util import getImageText
 
 LayoutTemp = [
            'TryAgain',

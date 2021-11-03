@@ -1,4 +1,5 @@
-from Threads.ImageInfo import ImageInfo
+# ./Threads/Functions.py
+from Classes.ImageInfo import ImageInfo
 from Threads.Handler import runThreads, runRaku
 from Threads.Util import *
 

@@ -1,12 +1,7 @@
+# ./Threads/MainThread.py
 from Threads.Functions import *
 from ImageRec.Util import *
-
-UltPosition = [
-    (1000, 1260),
-    (1125, 1260),
-    (1260, 1260),
-    (1390, 1260),
-    (1520, 1260)]
+from ImageRec.Constants import getUltPositions, getScreenRegion
 
 
 def mainThread(window, values):
@@ -15,10 +10,18 @@ def mainThread(window, values):
     window.write_event_value('-THREAD-DefaultImageCheck-', results)
 
 def manualRaku(window, values):
+    """
+    BUGS : Battle can end while still clicking, this can
+           cause the Victory screen to be skipped.
+
+    SOLUTION? : Have a separate thread checking for victory screen,
+                at all times??
+    """
+    
+    
     start = time.time()
 
     rakuPosition = None
-    print(values)
     for i in range(0, 5):
         if values[f'RAKU_{i}'] == True:
             rakuPosition = i
@@ -65,7 +68,7 @@ def handleVictory(window, currentRound):
     #print(pyautogui.position())
     #time.sleep(.5)
 
-    pyautogui.screenshot('Tempstats.png', region=(910,34,699,1364))
+    pyautogui.screenshot('Tempstats.png', region=getScreenRegion())
     text = getImageText('Tempstats.png')
 
     subDir = 'MISC'
@@ -90,6 +93,9 @@ def handleVictory(window, currentRound):
     elif 'Infernal Fortress' in text:
         subDir = 'Hypogean Tower'
         text = 'Floor ' +  str(getFloor(text))
+    elif 'Celestial Sanctum' in text:
+        subDir = 'Celestial Tower'
+        text = 'Floor ' +  str(getFloor(text))
 
     if currentRound != -1:
         os.popen(f'mkdir "Images/BattleStatistics/{subDir}/{text}"').read()
@@ -105,7 +111,7 @@ def handleVictory(window, currentRound):
     if HeroInfo != None:
        handleClick(HeroInfo)
        time.sleep(1)
-       pyautogui.screenshot('Tempheroinfo.png', region=(876,34,776,1363))
+       pyautogui.screenshot('Tempheroinfo.png', region=getScreenRegion())
        os.popen(f'cp Tempheroinfo.png "Images/HeroInfo/{subDir}/{text}.png"').read()
        os.remove('Tempheroinfo.png');
 

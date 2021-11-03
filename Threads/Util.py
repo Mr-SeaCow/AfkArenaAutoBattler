@@ -1,6 +1,10 @@
-import pyautogui
-from Threads.ImageInfo import ImageInfo
+# ./Threads/Util.py
 import time
+
+import pyautogui
+
+from Classes.ImageInfo import ImageInfo
+
 def checkImage(imageLink, c=.75, g=True):
 
     img = pyautogui.locateCenterOnScreen('./TemplateImages/'+imageLink + '.png', grayscale=g, confidence=c)
