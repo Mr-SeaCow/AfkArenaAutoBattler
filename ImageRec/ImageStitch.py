@@ -77,7 +77,7 @@ def stitchImages(imgAra, topCrop, bottomCrop, outputName='./Images/ScreenShots/S
 def battleStitch(imgList):
     imgAra = []
 
-    maxRowSize = len(imgList) if len(imgList) < 5 else 5
+    maxRowSize = len(imgList) if len(imgList) < 4 else math.ceil(len(imgList) / 2)
 
     for name in imgList:
         imgAra.append(cv2.imread(name))
@@ -91,6 +91,6 @@ def battleStitch(imgList):
         imgAra.append(np.zeros((imgAra[0].shape[0],imgAra[0].shape[1],3), np.uint8))
 
     for row in range(0, rowCount):
-        rows.append(cv2.hconcat(imgAra[row*5:row*5+5]))
+        rows.append(cv2.hconcat(imgAra[row*maxRowSize:row*maxRowSize+maxRowSize]))
 
     cv2.imwrite('./Images/ScreenShots/vconcatTest.png', cv2.vconcat(rows))

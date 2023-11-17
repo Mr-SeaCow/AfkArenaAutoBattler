@@ -35,9 +35,8 @@ class MainWindow:
             #[sg.Frame('Auto Battle Settings', layout=self._buildLayout(lay))],
             #[sg.Frame('Raku Position', layout=self._buildRakuLayout())]
             ]
-
         self.window = sg.Window(title="AFK ARENA HELPER", layout=self.layout, default_element_size=(12, 1))
-        
+
         self._runningImgChecks = False
         self._runningVictory = False
         self._nextThreadRun = 0
@@ -229,7 +228,9 @@ class MainWindow:
             self._retryCount = 0
             return
         else:
-            self._prevKeys.append(temp)
+            self._prevKeys.append(temp) 
+            if len(self._prevKeys) < 2:
+                return
 
         if len(self._prevKeys) > 2:
             self._prevKeys.pop(0)

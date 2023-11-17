@@ -1,7 +1,7 @@
 # ./ImageRec/Constants.py
 
 def getScreenRegion():
-    return (930,34,699,1364)
+    return (910,34,699,1364)
 
 def getUltPositions():
     return [
